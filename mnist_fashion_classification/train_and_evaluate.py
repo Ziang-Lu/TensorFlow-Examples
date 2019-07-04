@@ -41,11 +41,15 @@ def _retrieve_data() -> tuple:
 
 def main():
     nn_model = _construct_model()
-    model.compile(optimizer=tf.train.AdamOptimizer(),
-                  loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    nn_model.compile(
+        optimizer=tf.train.AdamOptimizer(),
+        loss='sparse_categorical_crossentropy', metrics=['accuracy']
+    )
+
     train_imgs, train_labels, test_imgs, test_labels = _retrieve_data()
-    model.fit(train_imgs, train_labels, epochs=5)
-    _, test_acc = model.evaluate(test_imgs, test_labels)
+
+    nn_model.fit(train_imgs, train_labels, epochs=5)
+    _, test_acc = nn_model.evaluate(test_imgs, test_labels)
     print(f'Test accuracy = {test_acc}')
 
 
